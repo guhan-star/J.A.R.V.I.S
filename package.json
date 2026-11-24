@@ -1,0 +1,41 @@
+{
+  "name": "jarvis-desktop",
+  "version": "1.0.0",
+  "description": "J.A.R.V.I.S. Personal Desktop Assistant HUD",
+  "main": "dist/main/index.js",
+  "scripts": {
+    "dev": "concurrently -k -n \"VITE,ELECTRON\" -c \"cyan,magenta\" \"vite\" \"cross-env NODE_ENV=development npm run dev:electron\"",
+    "dev:electron": "tsc -p tsconfig.node.json --watch --preserveWatchOutput & electron .",
+    "build:node": "tsc -p tsconfig.node.json",
+    "build:renderer": "vite build",
+    "build": "npm run build:node && npm run build:renderer",
+    "start": "cross-env NODE_ENV=production electron .",
+    "preview": "npm run build && cross-env NODE_ENV=production electron ."
+  },
+  "keywords": [
+    "jarvis",
+    "desktop-assistant",
+    "hud",
+    "electron",
+    "react",
+    "typescript"
+  ],
+  "author": "Antigravity Engineering",
+  "license": "MIT",
+  "dependencies": {
+    "lucide-react": "^1.16.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "electron": "^35.0.0",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.0"
+  }
+}

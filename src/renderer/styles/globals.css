@@ -1,0 +1,235 @@
+:root {
+  /* Color Palette */
+  --bg-dark-base: #03060a;
+  --bg-surface: #060c14;
+  --bg-panel: rgba(8, 17, 28, 0.75);
+  --bg-panel-hover: rgba(14, 27, 44, 0.85);
+  --bg-card: rgba(11, 22, 38, 0.6);
+
+  /* Neon Accents */
+  --neon-cyan: #00f3ff;
+  --neon-cyan-glow: rgba(0, 243, 255, 0.35);
+  --neon-cyan-dim: rgba(0, 243, 255, 0.12);
+  --neon-cyan-subtle: rgba(0, 243, 255, 0.05);
+
+  --arc-blue: #0077ff;
+  --arc-blue-glow: rgba(0, 119, 255, 0.3);
+  --arc-blue-dim: rgba(0, 119, 255, 0.15);
+
+  --accent-gold: #ffaa00;
+  --accent-gold-glow: rgba(255, 170, 0, 0.35);
+
+  --accent-crimson: #ff2a4b;
+  --accent-crimson-glow: rgba(255, 42, 75, 0.4);
+
+  --accent-emerald: #00ffaa;
+  --accent-emerald-glow: rgba(0, 255, 170, 0.35);
+
+  /* Typography */
+  --text-bright: #e6f9ff;
+  --text-main: #b8e6f5;
+  --text-muted: #598399;
+  --text-dim: #304e61;
+
+  /* Borders & Highlights */
+  --hud-border-cyan: 1px solid rgba(0, 243, 255, 0.28);
+  --hud-border-blue: 1px solid rgba(0, 119, 255, 0.28);
+  --hud-border-subtle: 1px solid rgba(0, 243, 255, 0.12);
+
+  /* Fonts */
+  --font-orbitron: 'Orbitron', -apple-system, sans-serif;
+  --font-rajdhani: 'Rajdhani', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  background-color: var(--bg-dark-base);
+  color: var(--text-main);
+  font-family: var(--font-rajdhani);
+  font-size: 15px;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Futuristic Scanline Overlay */
+.scanline-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 243, 255, 0.02) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 9999;
+  opacity: 0.85;
+}
+
+/* Background HUD Hex Grid */
+.hud-grid-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(circle at 50% 35%, rgba(0, 119, 255, 0.08) 0%, transparent 60%),
+    linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 32px 32px, 32px 32px;
+  z-index: 0;
+}
+
+/* HUD Chamfered Card Styles */
+.hud-panel {
+  background: var(--bg-panel);
+  border: var(--hud-border-subtle);
+  backdrop-filter: blur(14px);
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hud-panel:hover {
+  border-color: rgba(0, 243, 255, 0.3);
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.08);
+}
+
+/* Angular Cut Corner (Sci-Fi HUD) */
+.hud-corner-cut {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 12px) 0,
+    100% 12px,
+    100% 100%,
+    12px 100%,
+    0 calc(100% - 12px)
+  );
+}
+
+.hud-corner-cut-sm {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 8px) 0,
+    100% 8px,
+    100% 100%,
+    8px 100%,
+    0 calc(100% - 8px)
+  );
+}
+
+/* Glowing Neon Utilities */
+.glow-cyan {
+  text-shadow: 0 0 10px var(--neon-cyan-glow);
+}
+
+.glow-box-cyan {
+  box-shadow: 0 0 16px var(--neon-cyan-glow);
+}
+
+.glow-blue {
+  text-shadow: 0 0 10px var(--arc-blue-glow);
+}
+
+/* Custom Scrollbar for Sci-Fi Lists */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(4, 10, 18, 0.6);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 243, 255, 0.25);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 243, 255, 0.5);
+  box-shadow: 0 0 8px rgba(0, 243, 255, 0.5);
+}
+
+/* Keyframes */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.8;
+    filter: drop-shadow(0 0 6px rgba(0, 243, 255, 0.4));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 14px rgba(0, 243, 255, 0.8));
+  }
+}
+
+@keyframes spinClockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinCounterClockwise {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes typingBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s infinite ease-in-out;
+}
+
+.animate-spin-slow {
+  animation: spinClockwise 24s linear infinite;
+}
+
+.animate-spin-reverse-slow {
+  animation: spinCounterClockwise 18s linear infinite;
+}
+
+/* Cinematic View Transition Animation */
+@keyframes viewFadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.view-transition-container {
+  animation: viewFadeSlide 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Selectable text utility for chat messages */
+.selectable-text {
+  user-select: text !important;
+}
